@@ -15,20 +15,23 @@ function arrowIcon(x, y, s, ang, col) {
 }
 
 function drawTopBar() {
+  // Skolappars Kotten-knapp sitter 56 px stor, 12 px från övre vänstra hörnet.
+  // Räkna om det till dukens enheter (SC/OX) så att nivåpilen hamnar utanför rutan.
+  const KX = Math.max(0, (76 - OX) / SC - 10);
   // nivåpill
   const label = 'Nivå ' + (level + 1);
   ctx.save();
   ctx.fillStyle = 'rgba(74,63,57,.10)';
-  rr(10, 10, 136, 32, 16); ctx.fill();
+  rr(10 + KX, 10, 136, 32, 16); ctx.fill();
   ctx.fillStyle = C.cream;
-  rr(10, 6, 136, 32, 16); ctx.fill();
+  rr(10 + KX, 6, 136, 32, 16); ctx.fill();
   ctx.strokeStyle = C.sand; ctx.lineWidth = 3;
-  rr(10, 6, 136, 32, 16); ctx.stroke();
-  drawRobot(38, 25, Math.PI / 2, time, 'idle', 0.40);
+  rr(10 + KX, 6, 136, 32, 16); ctx.stroke();
+  drawRobot(38 + KX, 25, Math.PI / 2, time, 'idle', 0.40);
   ctx.fillStyle = C.brown2;
   ctx.font = 'bold 19px "Trebuchet MS", sans-serif';
   ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-  ctx.fillText(label, 58, 23);
+  ctx.fillText(label, 58 + KX, 23);
 
   // nivåprickar
   const n = LEVELS.length, cx = DW / 2 - (n - 1) * 13;
